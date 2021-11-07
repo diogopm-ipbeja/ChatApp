@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ChatApp</string>
+    <string name="create_contact_btn">Criar</string>
+    <string name="contact_photo_content_description">Fotografia do contacto</string>
+</resources>
