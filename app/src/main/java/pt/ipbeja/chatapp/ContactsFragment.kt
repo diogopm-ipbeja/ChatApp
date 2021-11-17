@@ -9,6 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pt.ipbeja.chatapp.databinding.ContactListItemBinding
 import pt.ipbeja.chatapp.databinding.FragmentContactsBinding
+import pt.ipbeja.chatapp.db.ChatDB
+import pt.ipbeja.chatapp.db.Contact
 
 class ContactsFragment : Fragment() {
 
@@ -32,22 +34,41 @@ class ContactsFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        val contacts = ChatDB(requireContext())
+            .contactDao()
+            .getAll()
+
+        adapter.data = contacts
+        adapter.notifyDataSetChanged()
+    }
+
 
     inner class ContactViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+        private lateinit var contact: Contact
         private val binding = ContactListItemBinding.bind(view)
 
         init {
 
+            binding.root.setOnClickListener {
+                findNavController()
+                    .navigate(ContactsFragmentDirections.actionContactsFragmentToChatFragment(
+                        contact.id
+                    ))
+            }
+
             binding.deleteBtn.setOnClickListener {
-                adapter.data.removeAt(adapterPosition)
-                adapter.notifyItemRemoved(adapterPosition)
+                // adapter.data.removeAt(adapterPosition)
+                // adapter.notifyItemRemoved(adapterPosition)
             }
 
         }
 
-
         fun bind(contact: Contact) {
+            this.contact = contact
             binding.contactName.text = contact.name
         }
 
@@ -55,7 +76,7 @@ class ContactsFragment : Fragment() {
 
     inner class ContactsAdapter : RecyclerView.Adapter<ContactViewHolder>() {
 
-        var data: MutableList<Contact> = mutableListOf()
+        var data: List<Contact> = listOf()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
             val v: View = LayoutInflater.from(parent.context)

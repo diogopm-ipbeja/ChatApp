@@ -5,4 +5,5 @@
     <string name="contact_photo_content_description">Fotografia do contacto</string>
     <string name="chat_message_input_hint">Escreva uma mensagem</string>
     <string name="send_message_button_content_description">Botão para enviar a mensagem</string>
+    <string name="create_contact_missing_name_error">Por favor insira o nome do contacto</string>
 </resources>
