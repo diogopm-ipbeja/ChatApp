@@ -9,5 +9,22 @@
         android:id="@+id/contactsFragment"
         android:name="pt.ipbeja.chatapp.ContactsFragment"
         android:label="fragment_contacts"
-        tools:layout="@layout/fragment_contacts" />
+        tools:layout="@layout/fragment_contacts" >
+        <action
+            android:id="@+id/action_contactsFragment_to_createContactFragment"
+            app:destination="@id/createContactFragment" />
+        <action
+            android:id="@+id/action_contactsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createContactFragment"
+        android:name="pt.ipbeja.chatapp.CreateContactFragment"
+        android:label="create_contact_fragment"
+        tools:layout="@layout/create_contact_fragment" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="pt.ipbeja.chatapp.ChatFragment"
+        android:label="chat_fragment"
+        tools:layout="@layout/chat_fragment" />
 </navigation>

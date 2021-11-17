@@ -5,14 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pt.ipbeja.chatapp.databinding.ContactListItemBinding
 import pt.ipbeja.chatapp.databinding.FragmentContactsBinding
 
 class ContactsFragment : Fragment() {
 
-    private lateinit var adapter: ContactsAdapter
+    private val adapter: ContactsAdapter = ContactsAdapter()
     private lateinit var binding: FragmentContactsBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,26 +25,10 @@ class ContactsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // Pode ser definido no XML (ver fragment_contacts.xml)
-        // val llm = LinearLayoutManager(requireContext())
-        // binding.contactList.layoutManager = llm
 
-        this.adapter = ContactsAdapter()
         binding.contactList.adapter = adapter
-
-
         binding.addContactBtn.setOnClickListener {
-            val last = adapter.data.lastOrNull()
-            val c = if (last != null) {
-                val newId = last.id + 1
-                val name = "Contact #$newId"
-                Contact(newId, name)
-            } else {
-                Contact(1, "Contact #1")
-            }
-
-            adapter.data.add(c)
-            adapter.notifyItemInserted(adapter.itemCount - 1)
+            findNavController().navigate(ContactsFragmentDirections.actionContactsFragmentToCreateContactFragment())
         }
     }
 
@@ -53,7 +39,7 @@ class ContactsFragment : Fragment() {
 
         init {
 
-            binding.root.setOnClickListener {
+            binding.deleteBtn.setOnClickListener {
                 adapter.data.removeAt(adapterPosition)
                 adapter.notifyItemRemoved(adapterPosition)
             }

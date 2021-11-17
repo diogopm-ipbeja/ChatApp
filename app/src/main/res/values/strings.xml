@@ -3,4 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="create_contact_btn">Create</string>
     <string name="contact_photo_content_description">Contact photo</string>
+    <string name="chat_message_input_hint">Type a message</string>
+    <string name="send_message_button_content_description">Send message button</string>
 </resources>
