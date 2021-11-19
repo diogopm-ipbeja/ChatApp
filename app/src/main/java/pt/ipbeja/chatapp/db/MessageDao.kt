@@ -1,6 +1,7 @@
 package pt.ipbeja.chatapp.db
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Query
 
 @Dao
 interface MessageDao : BaseDao<Message> {

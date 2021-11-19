@@ -6,4 +6,12 @@
     <string name="chat_message_input_hint">Escreva uma mensagem</string>
     <string name="send_message_button_content_description">Botão para enviar a mensagem</string>
     <string name="create_contact_missing_name_error">Por favor insira o nome do contacto</string>
+    <string name="contact_item_date_of_birth">Data de nascimento: %s</string>
+    <string name="create_contact_fragment_label">Criar contacto</string>
+    <string name="delete_contact_dialog_title">Apagar contacto</string>
+    <string name="delete_contact_dialog_message">Tem a certeza de que quer eliminar o/a %s?</string>
+    <string name="create_contact_name_hint">Name</string>
+    <string name="create_contact_dob_title">Date of birth</string>
+    <string name="delete_contact_dialog_positive">Apagar</string>
+    <string name="delete_contact_dialog_negative">Cancelar</string>
 </resources>

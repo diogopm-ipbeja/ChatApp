@@ -1,10 +1,11 @@
 package pt.ipbeja.chatapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import pt.ipbeja.chatapp.databinding.ContactListItemBinding
@@ -41,7 +42,7 @@ class ContactsFragment : Fragment() {
             .contactDao()
             .getAll()
 
-        adapter.data = contacts
+        adapter.data = contacts.toMutableList()
         adapter.notifyDataSetChanged()
     }
 
@@ -61,8 +62,19 @@ class ContactsFragment : Fragment() {
             }
 
             binding.deleteBtn.setOnClickListener {
-                // adapter.data.removeAt(adapterPosition)
-                // adapter.notifyItemRemoved(adapterPosition)
+
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.delete_contact_dialog_title))
+                    .setMessage(getString(R.string.delete_contact_dialog_message, contact.name))
+                    .setPositiveButton(getString(R.string.delete_contact_dialog_positive)) { _, _ ->
+                        ChatDB(requireContext())
+                            .contactDao()
+                            .delete(contact)
+                        adapter.data.removeAt(adapterPosition)
+                        adapter.notifyItemRemoved(adapterPosition)
+                    }
+                    .setNegativeButton(getString(R.string.delete_contact_dialog_negative), null)
+                    .show()
             }
 
         }
@@ -70,13 +82,14 @@ class ContactsFragment : Fragment() {
         fun bind(contact: Contact) {
             this.contact = contact
             binding.contactName.text = contact.name
+            binding.contactDob.text = resources.getString(R.string.contact_item_date_of_birth, contact.dateOfBirth)
         }
 
     }
 
     inner class ContactsAdapter : RecyclerView.Adapter<ContactViewHolder>() {
 
-        var data: List<Contact> = listOf()
+        var data: MutableList<Contact> = mutableListOf()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
             val v: View = LayoutInflater.from(parent.context)
