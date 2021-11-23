@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.snackbar.Snackbar
 import pt.ipbeja.chatapp.databinding.CreateContactFragmentBinding
 import pt.ipbeja.chatapp.db.ChatDB
 import pt.ipbeja.chatapp.db.Contact
-import java.time.ZoneId
+import java.time.LocalDate
 import java.util.*
 
 
@@ -55,12 +54,9 @@ class CreateContactFragment : Fragment() {
                     return@setOnClickListener
                 }
 
-                // TODO ... save date of birth
-                val calendar = Calendar.getInstance().apply {
-                    set(dobPicker.year, dobPicker.month, dobPicker.dayOfMonth)
-                }
 
-                val dateOfBirth = calendar.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                val dateOfBirth =
+                    LocalDate.of(dobPicker.year, dobPicker.month, dobPicker.dayOfMonth)
 
 
                 val contact = Contact(name, dateOfBirth)

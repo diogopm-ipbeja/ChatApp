@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(entities = [Contact::class, Message::class], version = 1, exportSchema = false)
-@TypeConverters(DateConverters::class, LocalDateConverters::class)
+@TypeConverters(OffsetDateTimeConverters::class, LocalDateConverters::class)
 abstract class ChatDB : RoomDatabase() {
 
     abstract fun contactDao(): ContactDao
