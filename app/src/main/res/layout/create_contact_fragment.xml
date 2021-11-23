@@ -9,7 +9,7 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -19,6 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameInputLayout"
@@ -36,8 +37,9 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/dateOfBirthTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -54,16 +56,15 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-
+                app:layout_constraintTop_toBottomOf="@+id/dateOfBirthTitle"
+                android:calendarViewShown="false" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

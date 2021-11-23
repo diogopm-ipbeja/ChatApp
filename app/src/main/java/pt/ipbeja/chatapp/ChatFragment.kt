@@ -20,6 +20,10 @@ import kotlin.random.Random
 
 class ChatFragment : Fragment() {
 
+
+    // TODO Add a menu to this Fragment with:
+    //  - A button to delete ALL messages (with user confirmation)
+
     private val args : ChatFragmentArgs by navArgs()
 
     private lateinit var binding: ChatFragmentBinding

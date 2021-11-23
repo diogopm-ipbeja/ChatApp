@@ -1,9 +1,7 @@
 package pt.ipbeja.chatapp
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -18,6 +16,8 @@ class ContactsFragment : Fragment() {
     private val adapter: ContactsAdapter = ContactsAdapter()
     private lateinit var binding: FragmentContactsBinding
 
+    // TODO Add a menu to this Fragment with:
+    //  - A button to delete ALL contacts (with user confirmation)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +34,6 @@ class ContactsFragment : Fragment() {
             findNavController().navigate(ContactsFragmentDirections.actionContactsFragmentToCreateContactFragment())
         }
     }
-
     override fun onResume() {
         super.onResume()
 
@@ -62,19 +61,7 @@ class ContactsFragment : Fragment() {
             }
 
             binding.deleteBtn.setOnClickListener {
-
-                AlertDialog.Builder(requireContext())
-                    .setTitle(getString(R.string.delete_contact_dialog_title))
-                    .setMessage(getString(R.string.delete_contact_dialog_message, contact.name))
-                    .setPositiveButton(getString(R.string.delete_contact_dialog_positive)) { _, _ ->
-                        ChatDB(requireContext())
-                            .contactDao()
-                            .delete(contact)
-                        adapter.data.removeAt(adapterPosition)
-                        adapter.notifyItemRemoved(adapterPosition)
-                    }
-                    .setNegativeButton(getString(R.string.delete_contact_dialog_negative), null)
-                    .show()
+                // TODO Delete this contact. Show an AlertDialog for user confirmation
             }
 
         }

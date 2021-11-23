@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.snackbar.Snackbar
 import pt.ipbeja.chatapp.databinding.CreateContactFragmentBinding
 import pt.ipbeja.chatapp.db.ChatDB
@@ -14,10 +15,7 @@ import pt.ipbeja.chatapp.db.Contact
 import java.time.ZoneId
 import java.util.*
 
-// TODO Completar este Fragment.
-//  Definir um layout que permita ao utilizador indicar o nome do utilizador
-//  Opcionalmente, pode definir também outros atributos (fotografia, data de nascimento, etc.)
-//  -- O contacto aqui criado deve ser guardado na base de dados
+
 class CreateContactFragment : Fragment() {
 
 
@@ -50,7 +48,7 @@ class CreateContactFragment : Fragment() {
                         requireView(),
                         errorMessage,
                         Snackbar.LENGTH_SHORT
-                    ).setAction(android.R.string.ok) {/* Nothing */}
+                    ).setAction(android.R.string.ok) {/* Nothing */ }
                         .show()
 
                     nameInputLayout.error = errorMessage
