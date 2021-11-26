@@ -16,8 +16,12 @@ class ContactsFragment : Fragment() {
     private val adapter: ContactsAdapter = ContactsAdapter()
     private lateinit var binding: FragmentContactsBinding
 
-    // TODO Add a menu to this Fragment with:
-    //  - A button to delete ALL contacts (with user confirmation)
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,13 +40,48 @@ class ContactsFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        refreshList()
+    }
 
+    private fun refreshList() {
         val contacts = ChatDB(requireContext())
             .contactDao()
             .getAll()
 
         adapter.data = contacts.toMutableList()
         adapter.notifyDataSetChanged()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.contacts, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if(item.itemId == R.id.deleteAllContacts) {
+
+            AlertDialog.Builder(requireContext())
+                .setTitle("Delete all contacts")
+                .setMessage("Are you sure you want to delete all contacts?")
+                .setPositiveButton("Delete") { _, _ ->
+
+                    ChatDB(requireContext())
+                        .contactDao()
+                        .deleteAll()
+
+                    refreshList()
+
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+
+            return true
+        }
+        else if(item.itemId == R.id.contactsMap) {
+            findNavController().navigate(ContactsFragmentDirections.actionContactsFragmentToContactsMapFragment())
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
@@ -61,7 +100,21 @@ class ContactsFragment : Fragment() {
             }
 
             binding.deleteBtn.setOnClickListener {
-                // TODO Delete this contact. Show an AlertDialog for user confirmation
+                val msg = resources.getString(R.string.delete_contact_dialog_message, contact.name)
+                AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.delete_contact_dialog_title)
+                    .setMessage(msg)
+                    .setPositiveButton(R.string.delete_contact_dialog_positive) { _, _ ->
+                        // Apagar da BD, Adapter e notificar
+                        ChatDB(requireContext())
+                            .contactDao()
+                            .delete(contact)
+
+                        adapter.data.remove(contact)
+                        adapter.notifyItemRemoved(adapterPosition)
+                    }
+                    .setNegativeButton(R.string.delete_contact_dialog_negative, null)
+                    .show()
             }
 
         }

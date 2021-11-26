@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ChatApp</string>
     <string name="create_contact_btn">Criar</string>
     <string name="contact_photo_content_description">Fotografia do contacto</string>
     <string name="chat_message_input_hint">Escreva uma mensagem</string>
@@ -14,4 +13,7 @@
     <string name="create_contact_dob_title">Date of birth</string>
     <string name="delete_contact_dialog_positive">Apagar</string>
     <string name="delete_contact_dialog_negative">Cancelar</string>
+    <string name="delete_all_contacts">Apagar contactos</string>
+    <string name="contacts_map_label">Mapa de contactos</string>
+    <string name="contact_location_label">Localização do contacto</string>
 </resources>

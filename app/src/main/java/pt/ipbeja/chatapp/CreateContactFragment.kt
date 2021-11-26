@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import pt.ipbeja.chatapp.databinding.CreateContactFragmentBinding
-import pt.ipbeja.chatapp.db.ChatDB
-import pt.ipbeja.chatapp.db.Contact
 import java.time.LocalDate
 import java.util.*
 
@@ -59,13 +57,13 @@ class CreateContactFragment : Fragment() {
                     LocalDate.of(dobPicker.year, dobPicker.month, dobPicker.dayOfMonth)
 
 
-                val contact = Contact(name, dateOfBirth)
+                /*val contact = Contact(name, dateOfBirth)
                 val id = ChatDB(requireContext())
                     .contactDao()
-                    .insert(contact)
+                    .insert(contact)*/
                 Log.i(CreateContactFragment::class.java.simpleName, "Contact created with id $id")
 
-                findNavController().popBackStack()
+                findNavController().navigate(CreateContactFragmentDirections.actionCreateContactFragmentToContactLocation(name, dateOfBirth))
 
 
             }

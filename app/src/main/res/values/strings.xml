@@ -1,11 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ChatApp</string>
+    <string name="app_name" translatable="false">ChatApp</string>
     <string name="create_contact_btn">Create</string>
     <string name="contact_photo_content_description">Contact photo</string>
     <string name="chat_message_input_hint">Type a message</string>
     <string name="send_message_button_content_description">Send message button</string>
     <string name="create_contact_missing_name_error">Please insert the contact name</string>
-
     <string name="contact_item_date_of_birth">Date of birth: %s</string>
     <string name="create_contact_fragment_label">Create contact</string>
     <string name="delete_contact_dialog_title">Delete contact</string>
@@ -14,4 +14,7 @@
     <string name="create_contact_dob_title">Date of birth</string>
     <string name="delete_contact_dialog_positive">Delete</string>
     <string name="delete_contact_dialog_negative">Cancel</string>
+    <string name="delete_all_contacts">Delete contacts</string>
+    <string name="contacts_map_label">Contacts map</string>
+    <string name="contact_location_label">Contact location</string>
 </resources>

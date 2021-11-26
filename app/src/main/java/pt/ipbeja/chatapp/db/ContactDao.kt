@@ -12,4 +12,6 @@ interface ContactDao : BaseDao<Contact> {
     @Query("select * from contact where id = :contactId")
     fun get(contactId: Long) : Contact
 
+    @Query("delete from contact")
+    fun deleteAll() : Int
 }

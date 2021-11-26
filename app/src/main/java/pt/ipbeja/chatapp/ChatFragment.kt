@@ -51,9 +51,7 @@ class ChatFragment : Fragment() {
         val adapter = MessageAdapter()
         adapter.data = messages.toMutableList()
 
-        (binding.chatList.layoutManager as LinearLayoutManager).let {
-            it.stackFromEnd = true
-        }
+        (binding.chatList.layoutManager as LinearLayoutManager).stackFromEnd = true
 
         binding.sendMsgBtn.setOnClickListener {
             val text = binding.messageInput.text?.toString()
@@ -97,16 +95,15 @@ class ChatFragment : Fragment() {
             }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-            if(viewType == 0) { // Outgoing
+            return if(viewType == 0) { // Outgoing
                 val v = LayoutInflater.from(parent.context)
                     .inflate(R.layout.outgoing_message, parent, false)
-                return OutgoingMessageViewHolder(v)
+                OutgoingMessageViewHolder(v)
 
-            }
-            else {
+            } else {
                 val v = LayoutInflater.from(parent.context)
                     .inflate(R.layout.incoming_message, parent, false)
-                return IncomingMessageViewHolder(v)
+                IncomingMessageViewHolder(v)
             }
 
         }
@@ -130,7 +127,7 @@ class ChatFragment : Fragment() {
 
 
     abstract inner class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        lateinit var message: Message
+        private lateinit var message: Message
 
         //abstract fun bind(message: Message) ou uma função 'aberta' (pode ser overriden)
         open fun bind(message: Message) {
