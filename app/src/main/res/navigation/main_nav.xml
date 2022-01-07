@@ -3,32 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav.xml"
-    app:startDestination="@id/contactsFragment">
+    app:startDestination="@id/contacts">
 
-    <fragment
-        android:id="@+id/contactsFragment"
-        android:name="pt.ipbeja.chatapp.ContactsFragment"
-        android:label="@string/app_name"
-        tools:layout="@layout/fragment_contacts" >
-        <action
-            android:id="@+id/action_contactsFragment_to_createContactFragment"
-            app:destination="@id/createContactFragment" />
-        <action
-            android:id="@+id/action_contactsFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
-        <action
-            android:id="@+id/action_contactsFragment_to_contactsMapFragment"
-            app:destination="@id/contactsMapFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/createContactFragment"
-        android:name="pt.ipbeja.chatapp.CreateContactFragment"
-        android:label="@string/create_contact_fragment_label"
-        tools:layout="@layout/create_contact_fragment" >
-        <action
-            android:id="@+id/action_createContactFragment_to_contactLocation"
-            app:destination="@id/contactLocation" />
-    </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="pt.ipbeja.chatapp.ChatFragment"
@@ -38,25 +14,48 @@
             android:name="contactId"
             app:argType="long" />
     </fragment>
-    <fragment
-        android:id="@+id/contactLocation"
-        android:name="pt.ipbeja.chatapp.ContactLocation"
-        android:label="@string/contact_location_label"
-        tools:layout="@layout/contact_location_fragment" >
-        <argument
-            android:name="contactName"
-            app:argType="string" />
-        <argument
-            android:name="contactDateOfBirth"
-            app:argType="java.time.LocalDate" />
-    </fragment>
-    <fragment
-        android:id="@+id/contactsMapFragment"
-        android:name="pt.ipbeja.chatapp.ContactsMapFragment"
-        android:label="@string/contacts_map_label"
-        tools:layout="@layout/fragment_contacts_map" >
-        <action
-            android:id="@+id/action_contactsMapFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
-    </fragment>
+    <navigation android:id="@+id/contacts"
+        app:startDestination="@id/contactsFragment">
+        <fragment
+            android:id="@+id/contactsFragment"
+            android:name="pt.ipbeja.chatapp.ContactsFragment"
+            android:label="@string/app_name"
+            tools:layout="@layout/fragment_contacts">
+            <action
+                android:id="@+id/action_contactsFragment_to_createContactFragment"
+                app:destination="@id/createContact" />
+            <action
+                android:id="@+id/action_contactsFragment_to_chatFragment"
+                app:destination="@id/chatFragment" />
+            <action
+                android:id="@+id/action_contactsFragment_to_contactsMapFragment"
+                app:destination="@id/contactsMapFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/contactsMapFragment"
+            android:name="pt.ipbeja.chatapp.ContactsMapFragment"
+            android:label="@string/contacts_map_label"
+            tools:layout="@layout/fragment_contacts_map">
+            <action
+                android:id="@+id/action_contactsMapFragment_to_chatFragment"
+                app:destination="@id/chatFragment" />
+        </fragment>
+    </navigation>
+    <navigation android:id="@+id/createContact"
+        app:startDestination="@id/createContactFragment">
+        <fragment
+            android:id="@+id/contactLocation"
+            android:name="pt.ipbeja.chatapp.ContactLocation"
+            android:label="@string/contact_location_label"
+            tools:layout="@layout/contact_location_fragment"/>
+        <fragment
+            android:id="@+id/createContactFragment"
+            android:name="pt.ipbeja.chatapp.CreateContactFragment"
+            android:label="@string/create_contact_fragment_label"
+            tools:layout="@layout/create_contact_fragment">
+            <action
+                android:id="@+id/action_createContactFragment_to_contactLocation"
+                app:destination="@id/contactLocation" />
+        </fragment>
+    </navigation>
 </navigation>

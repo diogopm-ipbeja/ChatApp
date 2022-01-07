@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.navGraphViewModels
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -18,7 +19,7 @@ import pt.ipbeja.chatapp.db.Coordinates
 
 class ContactLocation : Fragment() {
 
-    private val args: ContactLocationArgs by navArgs()
+    private val viewModel: CreateContactViewModel by navGraphViewModels(R.id.createContact)
     private lateinit var binding: ContactLocationFragmentBinding
 
     private var marker: Marker? = null
@@ -45,6 +46,7 @@ class ContactLocation : Fragment() {
                 } else {
                     marker!!.position = it
                 }
+                viewModel.setLocation(it.latitude, it.longitude)
             }
         }
 
@@ -58,12 +60,7 @@ class ContactLocation : Fragment() {
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
-            else {
-                val contact = Contact(name = args.contactName, dateOfBirth = args.contactDateOfBirth, Coordinates(marker!!.position.latitude, marker!!.position.longitude))
-                ChatDB(requireContext())
-                    .contactDao()
-                    .insert(contact)
-
+            else if(viewModel.createContact()) {
                 findNavController().popBackStack(R.id.contactsFragment, false)
             }
         }

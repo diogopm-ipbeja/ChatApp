@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -17,6 +18,7 @@ import pt.ipbeja.chatapp.db.Contact
 
 class ContactsMapFragment : Fragment() {
 
+    private val viewModel: ContactsViewModel by navGraphViewModels(R.id.contacts)
     private lateinit var binding: FragmentContactsMapBinding
 
     override fun onCreateView(
@@ -32,13 +34,11 @@ class ContactsMapFragment : Fragment() {
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 
         mapFragment.getMapAsync { map ->
-            val contacts = ChatDB(requireContext())
-                .contactDao()
-                .getAll()
+
 
             val boundsBuilder = LatLngBounds.builder()
 
-            contacts.forEach {
+            viewModel.contacts.forEach {
                 val latLng = LatLng(it.location.latitude, it.location.longitude)
                 boundsBuilder.include(latLng)
                 val m = map.addMarker(MarkerOptions()

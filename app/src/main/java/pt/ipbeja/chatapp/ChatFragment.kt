@@ -1,5 +1,7 @@
 package pt.ipbeja.chatapp
 
+import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,13 +24,31 @@ import pt.ipbeja.chatapp.db.Message
 import pt.ipbeja.chatapp.db.MessageDirection
 import kotlin.random.Random
 
+class ChatViewModel(val contactId: Long, app: Application) : AndroidViewModel(app) {
+
+    private val dao = ChatDB(app).messageDao()
+    var messages = dao.getAll(contactId).toMutableList()
+
+    fun sendMessage(text: String, direction: MessageDirection): Message {
+        val data = Message(contactId, text, direction)
+        dao.insert(data)
+        messages.add(data)
+        return data
+    }
+
+    class Factory(private val contactId: Long, private val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return ChatViewModel(contactId, app) as T
+        }
+    }
+}
+
+
 class ChatFragment : Fragment() {
 
-
-    // TODO Add a menu to this Fragment with:
-    //  - A button to delete ALL messages (with user confirmation)
-
     private val args : ChatFragmentArgs by navArgs()
+    private val viewModel: ChatViewModel by viewModels(factoryProducer = { ChatViewModel.Factory(args.contactId, requireActivity().application) })
+
 
     private lateinit var binding: ChatFragmentBinding
 

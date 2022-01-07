@@ -1,18 +1,51 @@
 package pt.ipbeja.chatapp
 
+import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.RecyclerView
 import pt.ipbeja.chatapp.databinding.ContactListItemBinding
 import pt.ipbeja.chatapp.databinding.FragmentContactsBinding
 import pt.ipbeja.chatapp.db.ChatDB
 import pt.ipbeja.chatapp.db.Contact
+import pt.ipbeja.chatapp.db.ContactDao
+import pt.ipbeja.chatapp.utils.TAG
+
+
+class ContactsViewModel(app: Application) : AndroidViewModel(app) {
+
+    private val dao: ContactDao = ChatDB(app).contactDao()
+
+    var contacts: List<Contact> = dao.getAll()
+        private set
+
+
+    init {
+        Log.i(TAG, "ContactsViewModel Created!")
+    }
+
+    fun createContact(contact: Contact) {
+        dao.insert(contact)
+        refreshContacts()
+    }
+
+    fun refreshContacts() {
+        contacts = dao.getAll()
+    }
+
+}
 
 class ContactsFragment : Fragment() {
 
+    private val viewModel : ContactsViewModel by navGraphViewModels(R.id.contacts)
     private val adapter: ContactsAdapter = ContactsAdapter()
     private lateinit var binding: FragmentContactsBinding
 
@@ -44,11 +77,14 @@ class ContactsFragment : Fragment() {
     }
 
     private fun refreshList() {
+        /*
         val contacts = ChatDB(requireContext())
             .contactDao()
             .getAll()
+        */
+        viewModel.refreshContacts()
 
-        adapter.data = contacts.toMutableList()
+        adapter.data = viewModel.contacts.toMutableList()
         adapter.notifyDataSetChanged()
     }
 
