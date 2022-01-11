@@ -38,7 +38,8 @@ class ContactsMapFragment : Fragment() {
 
         mapFragment.getMapAsync { map ->
 
-            
+            if(viewModel.contacts.isEmpty()) return@getMapAsync
+
             val boundsBuilder = LatLngBounds.builder()
 
             viewModel.contacts.forEach {
@@ -50,6 +51,8 @@ class ContactsMapFragment : Fragment() {
                     .position(latLng))!!
                 m.tag = it
             }
+
+
             val bounds = boundsBuilder.build()
 
             map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 200))
