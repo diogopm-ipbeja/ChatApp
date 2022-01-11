@@ -24,6 +24,7 @@ import pt.ipbeja.chatapp.db.Message
 import pt.ipbeja.chatapp.db.MessageDirection
 import kotlin.random.Random
 
+
 class ChatViewModel(val contactId: Long, app: Application) : AndroidViewModel(app) {
 
     private val dao = ChatDB(app).messageDao()
@@ -37,6 +38,7 @@ class ChatViewModel(val contactId: Long, app: Application) : AndroidViewModel(ap
     }
 
     class Factory(private val contactId: Long, private val app: Application) : ViewModelProvider.Factory {
+
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return ChatViewModel(contactId, app) as T
         }
@@ -44,9 +46,11 @@ class ChatViewModel(val contactId: Long, app: Application) : AndroidViewModel(ap
 }
 
 
+
 class ChatFragment : Fragment() {
 
     private val args : ChatFragmentArgs by navArgs()
+
     private val viewModel: ChatViewModel by viewModels(factoryProducer = { ChatViewModel.Factory(args.contactId, requireActivity().application) })
 
 

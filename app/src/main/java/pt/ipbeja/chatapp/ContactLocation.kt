@@ -52,7 +52,6 @@ class ContactLocation : Fragment() {
 
         binding.createContactBtn.setOnClickListener {
 
-
             if (marker == null) {
                 Snackbar.make(
                     requireView(),

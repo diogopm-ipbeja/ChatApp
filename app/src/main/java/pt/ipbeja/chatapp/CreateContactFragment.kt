@@ -101,7 +101,7 @@ class CreateContactFragment : Fragment() {
 
 
                 val dateOfBirth =
-                    LocalDate.of(dobPicker.year, dobPicker.month, dobPicker.dayOfMonth)
+                    LocalDate.of(dobPicker.year, dobPicker.month + 1, dobPicker.dayOfMonth)
                 viewModel.setDate(dateOfBirth)
 
                 /*val contact = Contact(name, dateOfBirth)

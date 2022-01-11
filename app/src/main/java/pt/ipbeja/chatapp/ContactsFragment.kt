@@ -46,6 +46,8 @@ class ContactsViewModel(app: Application) : AndroidViewModel(app) {
 class ContactsFragment : Fragment() {
 
     private val viewModel : ContactsViewModel by navGraphViewModels(R.id.contacts)
+
+
     private val adapter: ContactsAdapter = ContactsAdapter()
     private lateinit var binding: FragmentContactsBinding
 

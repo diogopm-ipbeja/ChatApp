@@ -18,7 +18,10 @@ import pt.ipbeja.chatapp.db.Contact
 
 class ContactsMapFragment : Fragment() {
 
+
     private val viewModel: ContactsViewModel by navGraphViewModels(R.id.contacts)
+
+
     private lateinit var binding: FragmentContactsMapBinding
 
     override fun onCreateView(
@@ -35,7 +38,7 @@ class ContactsMapFragment : Fragment() {
 
         mapFragment.getMapAsync { map ->
 
-
+            
             val boundsBuilder = LatLngBounds.builder()
 
             viewModel.contacts.forEach {
