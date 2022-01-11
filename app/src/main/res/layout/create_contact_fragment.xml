@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateContactFragment"
+    tools:context=".ui.createcontact.CreateContactFragment"
     android:clipChildren="false"
     android:clipToPadding="false">
 
@@ -21,13 +21,26 @@
             android:layout_height="wrap_content">
 
 
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:src="@drawable/ic_baseline_add_a_photo_24"
+                />
+
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="@+id/dobPicker"
                 app:layout_constraintStart_toStartOf="@+id/dobPicker"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/photo"
+                android:layout_marginTop="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameInput"

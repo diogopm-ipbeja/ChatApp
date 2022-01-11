@@ -1,4 +1,4 @@
-package pt.ipbeja.chatapp
+package pt.ipbeja.chatapp.ui.createcontact
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,16 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.navGraphViewModels
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
+import pt.ipbeja.chatapp.R
 import pt.ipbeja.chatapp.databinding.ContactLocationFragmentBinding
-import pt.ipbeja.chatapp.db.ChatDB
-import pt.ipbeja.chatapp.db.Contact
-import pt.ipbeja.chatapp.db.Coordinates
 
 class ContactLocation : Fragment() {
 

@@ -1,63 +1,19 @@
-package pt.ipbeja.chatapp
+package pt.ipbeja.chatapp.ui.createcontact
 
-import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.AndroidViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import coil.load
 import com.google.android.material.snackbar.Snackbar
+import pt.ipbeja.chatapp.R
 import pt.ipbeja.chatapp.databinding.CreateContactFragmentBinding
-import pt.ipbeja.chatapp.db.ChatDB
-import pt.ipbeja.chatapp.db.Contact
-import pt.ipbeja.chatapp.db.Coordinates
-import pt.ipbeja.chatapp.utils.TAG
 import java.time.LocalDate
 import java.util.*
-
-class CreateContactViewModel(app: Application) : AndroidViewModel(app) {
-
-    private val dao = ChatDB(app).contactDao()
-
-    private var name: String? = null
-    private var date: LocalDate? = null
-    private var location: Coordinates? = null
-
-    init {
-        Log.i(TAG, "CreateContactViewmodel created")
-    }
-
-    fun setName(name: String?): Boolean {
-        if (name.isNullOrBlank()) return false
-        this.name = name
-        return true
-    }
-
-
-    fun setDate(date: LocalDate): Boolean {
-        this.date = date
-        return true
-    }
-
-    fun setLocation(lat: Double, long: Double): Boolean {
-        if (lat !in -90.0..90.0 || long !in -180.0..180.0) return false
-        this.location = Coordinates(lat, long)
-        return true
-    }
-
-    fun createContact(): Boolean {
-        if (name.isNullOrBlank() || date == null || location == null) return false
-        dao.insert(Contact(name!!, date!!, location!!))
-        return true
-    }
-
-
-}
 
 class CreateContactFragment : Fragment() {
 
@@ -77,6 +33,14 @@ class CreateContactFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        with(binding.photo) {
+            setOnClickListener {
+                findNavController().navigate(CreateContactFragmentDirections.actionCreateContactFragmentToContactPhotoFragment())
+            }
+            viewModel.photoFile?.let { load(it) }
+        }
+
 
 
         binding.createContactBtn.setOnClickListener {

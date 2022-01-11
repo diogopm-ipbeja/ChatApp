@@ -1,4 +1,4 @@
-package pt.ipbeja.chatapp
+package pt.ipbeja.chatapp.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,8 +12,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import pt.ipbeja.chatapp.R
 import pt.ipbeja.chatapp.databinding.FragmentContactsMapBinding
-import pt.ipbeja.chatapp.db.ChatDB
 import pt.ipbeja.chatapp.db.Contact
 
 class ContactsMapFragment : Fragment() {
