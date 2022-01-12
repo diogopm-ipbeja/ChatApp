@@ -7,7 +7,7 @@ import androidx.room.Update
 interface BaseDao<T> {
 
     @Insert
-    fun insert(data: T) : Long
+    suspend fun insert(data: T) : Long
 
     @Insert
     fun insert(data: List<T>) : List<Long>

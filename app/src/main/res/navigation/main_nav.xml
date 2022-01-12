@@ -18,7 +18,7 @@
         app:startDestination="@id/contactsFragment">
         <fragment
             android:id="@+id/contactsFragment"
-            android:name="pt.ipbeja.chatapp.ContactsFragment"
+            android:name="pt.ipbeja.chatapp.ui.main.ContactsFragment"
             android:label="@string/app_name"
             tools:layout="@layout/fragment_contacts">
             <action
@@ -33,7 +33,7 @@
         </fragment>
         <fragment
             android:id="@+id/contactsMapFragment"
-            android:name="pt.ipbeja.chatapp.ContactsMapFragment"
+            android:name="pt.ipbeja.chatapp.ui.main.ContactsMapFragment"
             android:label="@string/contacts_map_label"
             tools:layout="@layout/fragment_contacts_map">
             <action
@@ -45,17 +45,25 @@
         app:startDestination="@id/createContactFragment">
         <fragment
             android:id="@+id/contactLocation"
-            android:name="pt.ipbeja.chatapp.ContactLocation"
+            android:name="pt.ipbeja.chatapp.ui.createcontact.ContactLocation"
             android:label="@string/contact_location_label"
             tools:layout="@layout/contact_location_fragment"/>
         <fragment
             android:id="@+id/createContactFragment"
-            android:name="pt.ipbeja.chatapp.CreateContactFragment"
+            android:name="pt.ipbeja.chatapp.ui.createcontact.CreateContactFragment"
             android:label="@string/create_contact_fragment_label"
             tools:layout="@layout/create_contact_fragment">
             <action
                 android:id="@+id/action_createContactFragment_to_contactLocation"
                 app:destination="@id/contactLocation" />
+            <action
+                android:id="@+id/action_createContactFragment_to_contactPhotoFragment"
+                app:destination="@id/contactPhotoFragment" />
         </fragment>
+        <fragment
+            android:id="@+id/contactPhotoFragment"
+            android:name="pt.ipbeja.chatapp.ui.createcontact.ContactPhotoFragment"
+            android:label="contact_photo_fragment"
+            tools:layout="@layout/contact_photo_fragment" />
     </navigation>
 </navigation>

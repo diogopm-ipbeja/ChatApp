@@ -23,7 +23,7 @@ abstract class ChatDB : RoomDatabase() {
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext, ChatDB::class.java, "chat.db")
                 .fallbackToDestructiveMigration()
-                .allowMainThreadQueries() // for now :)
+                //.allowMainThreadQueries() // TODO remove this flag. Create async DB operations
                 .build()
     }
 }
